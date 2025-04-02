@@ -85,9 +85,7 @@ with st.sidebar:
             st.session_state.target_page = "pages/reports.py"
             st.session_state.collapse_sidebar = True
             st.rerun()
-try:
-    st.image("IMG_2998.png", width=100, use_container_width=False)
-except FileNotFoundError:
+
     st.image("https://via.placeholder.com/100.png", width=100, use_container_width=False)  # صورة افتراضية في حالة الفشل
     st.warning("⚠️ تعذر العثور على 'logo.png'. يتم عرض صورة افتراضية.")
 # Main content

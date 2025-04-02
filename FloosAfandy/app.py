@@ -42,8 +42,7 @@ with st.sidebar:
             st.session_state.collapse_sidebar = True
             st.rerun()
 
-    st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=100, use_container_width=False)
-    st.warning("⚠️ تعذر العثور على 'IMG_2998.png'. يتم عرض صورة افتراضية.")
+    st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=False)
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()
     alerts = fm.check_alerts()
@@ -86,8 +85,7 @@ with st.sidebar:
             st.session_state.collapse_sidebar = True
             st.rerun()
 
-    st.image("https://via.placeholder.com/100.png", width=100, use_container_width=False)  # صورة افتراضية في حالة الفشل
-    st.warning("⚠️ تعذر العثور على 'logo.png'. يتم عرض صورة افتراضية.")
+        st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
 # Main content
 st.markdown("<p style='text-align: center; color: #6b7280;'>إدارة مالياتك بسهولة وأناقة</p>", unsafe_allow_html=True)
 st.markdown("---")

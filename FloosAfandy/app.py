@@ -41,9 +41,7 @@ with st.sidebar:
         if st.button("✖", key="close_sidebar"):
             st.session_state.collapse_sidebar = True
             st.rerun()
-try:
-    st.image("IMG_2998.png", width=100, use_container_width=True)
-except FileNotFoundError:
+
     st.image("https://via.placeholder.com/100.png", width=100, use_container_width=False)
     st.warning("⚠️ تعذر العثور على 'IMG_2998.png'. يتم عرض صورة افتراضية.")
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)

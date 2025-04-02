@@ -42,7 +42,7 @@ with st.sidebar:
             st.session_state.collapse_sidebar = True
             st.rerun()
 
-    st.image("https://via.placeholder.com/100.png", width=100, use_container_width=False)
+    st.image("https://files.fm/f/utzjc8g828", width=100, use_container_width=False)
     st.warning("⚠️ تعذر العثور على 'IMG_2998.png'. يتم عرض صورة افتراضية.")
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()

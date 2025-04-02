@@ -41,7 +41,7 @@ def get_custom_categories(account_id, trans_type):
     return fm.get_custom_categories(account_id, trans_type)
 
 with st.sidebar:
-    st.image("IMG_2998.png", width=300)
+    st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()
     alerts = fm.check_alerts()

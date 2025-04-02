@@ -83,7 +83,11 @@ with st.sidebar:
             st.session_state.target_page = "pages/reports.py"
             st.session_state.collapse_sidebar = True
             st.rerun()
-st.image("IMG_2998.png", width=300, use_container_width=True)
+try:
+    st.image("logo.png", width=100, use_container_width=False)
+except FileNotFoundError:
+    st.image("https://via.placeholder.com/100.png", width=100, use_container_width=False)  # صورة افتراضية في حالة الفشل
+    st.warning("⚠️ تعذر العثور على 'logo.png'. يتم عرض صورة افتراضية.")
 # Main content
 st.markdown("<p style='text-align: center; color: #6b7280;'>إدارة مالياتك بسهولة وأناقة</p>", unsafe_allow_html=True)
 st.markdown("---")

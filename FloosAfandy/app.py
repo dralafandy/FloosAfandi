@@ -13,7 +13,7 @@ if "target_page" not in st.session_state:
 
 # تحديد حالة القائمة الجانبية
 sidebar_state = "collapsed" if st.session_state.collapse_sidebar else "expanded"
-st.set_page_config(page_title="FloosAfandy - لوحة التحكم", layout="wide", initial_sidebar_state=sidebar_state)
+st.set_page_config(page_title="FloosAfandy - إحسبها يا عشوائي !!", layout="wide", initial_sidebar_state=sidebar_state)
 
 apply_sidebar_styles()
 
@@ -41,7 +41,7 @@ with st.sidebar:
         if st.button("✖", key="close_sidebar"):
             st.session_state.collapse_sidebar = True
             st.rerun()
-    st.image("https://via.placeholder.com/50.png", width=50)
+    st.image("IMG_2998.png", width=300)
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()
     alerts = fm.check_alerts()
@@ -83,9 +83,8 @@ with st.sidebar:
             st.session_state.target_page = "pages/reports.py"
             st.session_state.collapse_sidebar = True
             st.rerun()
-
+st.image("IMG_2998.png", width=100, use_column_width=False)
 # Main content
-st.markdown("<div style='text-align: center;'><img src='https://via.placeholder.com/100.png' style='vertical-align: middle; margin-right: 10px;'><h1 style='display: inline-block; color: #1A2525;'>FloosAfandy</h1></div>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #6b7280;'>إدارة مالياتك بسهولة وأناقة</p>", unsafe_allow_html=True)
 st.markdown("---")
 

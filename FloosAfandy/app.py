@@ -85,7 +85,7 @@ with st.sidebar:
             st.session_state.collapse_sidebar = True
             st.rerun()
 
-        st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
+st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
 # Main content
 st.markdown("<p style='text-align: center; color: #6b7280;'>إدارة مالياتك بسهولة وأناقة</p>", unsafe_allow_html=True)
 st.markdown("---")

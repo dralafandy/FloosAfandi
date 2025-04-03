@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from finance_manager import FinanceManager
 from datetime import timedelta, datetime
+import plotly.express as px
 from styles import apply_sidebar_styles
 
 # تهيئة الحالة
@@ -40,9 +40,8 @@ with st.sidebar:
     with col_close:
         if st.button("✖", key="close_sidebar"):
             st.session_state.collapse_sidebar = True
-            st.rerun()
-
-    st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=False)
+            st.experimental_rerun()
+    st.image("IMG_2998.png", width=300)
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()
     alerts = fm.check_alerts()
@@ -60,14 +59,14 @@ with st.sidebar:
         if st.button("📈 لوحة التحكم", key="nav_dashboard"):
             st.session_state.target_page = "app.py"
             st.session_state.collapse_sidebar = True
-            st.rerun()
+            st.experimental_rerun()
     with col2:
         btn_style = "background: linear-gradient(90deg, #B8E8EF, #A0E0DB);" if current_page == "pages/transactions.py" else ""
         st.markdown(f"<style>#nav_transactions {{ {btn_style} }}</style>", unsafe_allow_html=True)
         if st.button("💸 معاملاتي", key="nav_transactions"):
             st.session_state.target_page = "pages/transactions.py"
             st.session_state.collapse_sidebar = True
-            st.rerun()
+            st.experimental_rerun()
 
     col3, col4 = st.columns(2)
     with col3:
@@ -76,16 +75,15 @@ with st.sidebar:
         if st.button("🏦 حساباتي", key="nav_accounts"):
             st.session_state.target_page = "pages/accounts.py"
             st.session_state.collapse_sidebar = True
-            st.rerun()
+            st.experimental_rerun()
     with col4:
         btn_style = "background: linear-gradient(90deg, #B8E8EF, #A0E0DB);" if current_page == "pages/reports.py" else ""
         st.markdown(f"<style>#nav_reports {{ {btn_style} }}</style>", unsafe_allow_html=True)
         if st.button("📊 تقاريري", key="nav_reports"):
             st.session_state.target_page = "pages/reports.py"
             st.session_state.collapse_sidebar = True
-            st.rerun()
-
-st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
+            st.experimental_rerun()
+st.image("IMG_2998.png", width=300, use_container_width=True)
 # Main content
 st.markdown("<p style='text-align: center; color: #6b7280;'>إدارة مالياتك بسهولة وأناقة</p>", unsafe_allow_html=True)
 st.markdown("---")
@@ -103,7 +101,7 @@ with col_filter3:
     if st.button("🔄 إعادة تعيين", key="reset_filters"):
         st.session_state.time_range = "الكل"
         st.session_state.selected_account = "جميع الحسابات"
-        st.rerun()
+        st.experimental_rerun()
 
 # حساب التواريخ
 if time_range == "آخر 7 أيام":

@@ -146,42 +146,64 @@ with tab2:
     if "account_id" not in st.session_state:
         st.session_state.account_id = list(account_options.keys())[0] if accounts else None
 
-    with st.form(key="add_transaction_form"):
-        st.markdown("<div class='form-container'>", unsafe_allow_html=True)
-        account_id = st.selectbox("🏦 الحساب", options=list(account_options.keys()), 
-                                  format_func=lambda x: account_options[x], key="add_account",
-                                  index=list(account_options.keys()).index(st.session_state.account_id))
-        trans_type = st.selectbox("📋 نوع المعاملة", ["وارد", "منصرف"], key="add_type",
-                                  index=0 if st.session_state.trans_type == "وارد" else 1)
-        trans_type_db = "IN" if trans_type == "وارد" else "OUT"
-        categories = get_custom_categories(account_id, trans_type_db)
-        category_options = [cat[0] for cat in categories] if categories else ["غير مصنف"]
-        selected_category = st.selectbox("📂 الفئة", options=category_options, key="add_category")
-        amount = st.number_input("💵 المبلغ", min_value=0.01, step=0.01, format="%.2f", key="add_amount")
-        payment_method = st.selectbox("💳 طريقة الدفع", ["كاش", "بطاقة ائتمان", "تحويل بنكي"], key="add_payment")
-        description = st.text_area("📝 الوصف", placeholder="وصف المعاملة (اختياري)", key="add_desc")
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-        col5, col6, col7 = st.columns(3)
-        with col5:
-            submit_button = st.form_submit_button("💾 حفظ", type="primary")
-        with col6:
-            submit_add_another = st.form_submit_button("➕ حفظ وإضافة")
-        with col7:
-            reset_button = st.form_submit_button("🧹 مسح")
+    # تحديث القيم عند تغيير الحساب أو نوع المعاملة
+    st.session_state.account_id = st.selectbox(
+        "🏦 الحساب", 
+        options=list(account_options.keys()), 
+        format_func=lambda x: account_options[x], 
+        key="add_account",
+        index=list(account_options.keys()).index(st.session_state.account_id)
+    )
+    st.session_state.trans_type = st.selectbox(
+        "📋 نوع المعاملة", 
+        ["وارد", "منصرف"], 
+        key="add_type",
+        index=0 if st.session_state.trans_type == "وارد" else 1
+    )
+    trans_type_db = "IN" if st.session_state.trans_type == "وارد" else "OUT"
 
+    # Fetch the latest categories data
+    categories = get_custom_categories(st.session_state.account_id, trans_type_db)
+    category_options = [cat[0] for cat in categories] if categories else ["غير مصنف"]
+
+    # عناصر الإدخال
+    selected_category = st.selectbox(
+        "📂 الفئة", 
+        options=category_options, 
+        key="add_category"
+    )
+    amount = st.number_input("💵 المبلغ", min_value=0.01, step=0.01, format="%.2f", key="add_amount")
+    payment_method = st.selectbox("💳 طريقة الدفع", ["كاش", "بطاقة ائتمان", "تحويل بنكي"], key="add_payment")
+    description = st.text_area("📝 الوصف", placeholder="وصف المعاملة (اختياري)", key="add_desc")
+
+    # أزرار الإجراءات
+    col5, col6, col7 = st.columns(3)
+    with col5:
+        submit_button = st.button("💾 حفظ", key="submit_transaction")
+    with col6:
+        submit_add_another = st.button("➕ حفظ وإضافة", key="submit_add_another")
+    with col7:
+        reset_button = st.button("🧹 مسح", key="reset_transaction")
+
+    # معالجة الإجراءات
     if submit_button or submit_add_another:
+        # Fetch the latest accounts and categories again before saving
+        accounts = get_all_accounts()
+        account_options = {acc[0]: acc[1] for acc in accounts}
+        categories = get_custom_categories(st.session_state.account_id, trans_type_db)
+        category_options = [cat[0] for cat in categories] if categories else ["غير مصنف"]
+
         with st.spinner("جارٍ الحفظ..."):
             try:
-                final_trans_type_db = "IN" if trans_type == "وارد" else "OUT"
+                final_trans_type_db = "IN" if st.session_state.trans_type == "وارد" else "OUT"
                 final_category = selected_category if selected_category in category_options else "غير مصنف"
-                result = fm.add_transaction(account_id, amount, final_trans_type_db, description, payment_method, final_category)
+                result = fm.add_transaction(st.session_state.account_id, amount, final_trans_type_db, description, payment_method, final_category)
                 st.success(f"✅ تم حفظ المعاملة بالفئة: {final_category}")
                 if result and "تنبيه" in result:
                     st.warning(result)
                 if submit_add_another:
-                    st.session_state["trans_type"] = trans_type
-                    st.session_state["account_id"] = account_id
+                    st.session_state["trans_type"] = st.session_state.trans_type
+                    st.session_state["account_id"] = st.session_state.account_id
                 else:
                     st.rerun()
             except Exception as e:

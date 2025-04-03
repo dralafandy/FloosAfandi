@@ -26,7 +26,7 @@ if st.session_state.target_page:
     st.switch_page(target)
 
 with st.sidebar:
-    st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
+    st.image("IMG_2998.png", width=300)
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()
     alerts = fm.check_alerts()

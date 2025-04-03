@@ -41,7 +41,7 @@ with st.sidebar:
         if st.button("✖", key="close_sidebar"):
             st.session_state.collapse_sidebar = True
             st.experimental_rerun()
-    st.image("IMG_2998.png", width=300)
+    st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
     st.markdown("<h2>💰 FloosAfandy</h2>", unsafe_allow_html=True)
     fm = FinanceManager()
     alerts = fm.check_alerts()
@@ -83,7 +83,7 @@ with st.sidebar:
             st.session_state.target_page = "pages/reports.py"
             st.session_state.collapse_sidebar = True
             st.experimental_rerun()
-st.image("IMG_2998.png", width=300, use_container_width=True)
+st.image("https://i.ibb.co/hxjbR4Hv/IMG-2998.png", width=300, use_container_width=True)
 # Main content
 st.markdown("<p style='text-align: center; color: #6b7280;'>إدارة مالياتك بسهولة وأناقة</p>", unsafe_allow_html=True)
 st.markdown("---")
